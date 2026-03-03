@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/companies/pom.xml" />
         <option value="$PROJECT_DIR$/registry-server/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/report-ms/pom.xml" />
       </list>
     </option>
   </component>
