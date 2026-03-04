@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="gateway" />
         <module name="registry-server" />
       </profile>
       <profile name="Annotation profile for report-ms" enabled="true">
@@ -19,6 +20,7 @@
         </processorPath>
         <module name="report-ms" />
         <module name="companies" />
+        <module name="companies-crud-fallback" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,7 +30,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="companies" options="-parameters" />
+      <module name="companies-crud-fallback" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="practica" options="-parameters" />
       <module name="registry-server" options="-parameters" />
       <module name="report-ms" options="-parameters" />

@@ -3,9 +3,11 @@ package com.microservicios.report_ms.services;
 import com.microservicios.report_ms.helper.ReportHelper;
 import com.microservicios.report_ms.models.Company;
 import com.microservicios.report_ms.models.WebSite;
+import com.microservicios.report_ms.repositories.CompaniesFallbackRepository;
 import com.microservicios.report_ms.repositories.CompaniesRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,10 +21,19 @@ public class ReportServiceImpl implements ReportService {
 
     private final CompaniesRepository repository;
     private final ReportHelper helper;
+    private final CompaniesFallbackRepository fallbackRepository;
+    private final Resilience4JCircuitBreakerFactory circuitBreakerFactory;
 
     @Override
     public String makeReport(String name) {
-        return this.helper.readTemplate(this.repository.getByName(name).orElseThrow());
+
+        var circuitBreaker = this.circuitBreakerFactory.create("companies-circuitbreaker");
+        return  circuitBreaker.run(
+                () -> this.makeReportMain(name),
+                throwable -> this.makeReporFallback(name, throwable)
+        );
+
+
 
     }
 
@@ -51,4 +62,15 @@ public class ReportServiceImpl implements ReportService {
     public void deleteReport(String name) {
      this.repository.deleteByName(name);
     }
+
+    private String makeReportMain(String name){
+        return this.helper.readTemplate(this.repository.getByName(name).orElseThrow());
+    }
+
+    private String makeReporFallback(String name, Throwable error){
+        log.warn(error.getMessage());
+        return this.helper.readTemplate(this.fallbackRepository.getCompany(name));
+    }
+
+
 }
