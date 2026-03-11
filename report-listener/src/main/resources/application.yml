@@ -1,6 +1,6 @@
 spring:
   application:
-    name: reports-ms
+    name: report-listener
   profiles:
     default: default
   config:
@@ -12,12 +12,17 @@ spring:
           brokers: localhost:9092
       function:
         bindings:
-          consumerReport-out-0:
+          consumerReport-in-0:
             destination: consumerReport
+data:
+  mongodb:
+    authentication-database: admin
+    host: localhost
+    port: 27017
+    username: sa
+    password: sa
 server:
-  servlet:
-    context-path: /reports-ms
-  port: 7070
+  port: 0
 eureka:
   instance:
     instance-id: "${spring.application.name}:${random.value}"

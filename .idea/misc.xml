@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/report-ms/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/companies-crud-fallback/pom.xml" />
+        <option value="$PROJECT_DIR$/report-listener/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-server/pom.xml" />
       </list>
     </option>
   </component>
