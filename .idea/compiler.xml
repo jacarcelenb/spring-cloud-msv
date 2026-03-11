@@ -9,9 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="registry-server" />
-        <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for auth-server" enabled="true">
+      <profile name="Annotation profile for gateway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,6 +19,7 @@
         </processorPath>
         <module name="report-ms" />
         <module name="companies" />
+        <module name="gateway" />
         <module name="auth-server" />
         <module name="report-listener" />
         <module name="companies-crud-fallback" />
